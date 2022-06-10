@@ -32,7 +32,7 @@ class MoviesView(Resource):
     def post(self):
         new_data = request.json
 
-        movie_ = movie_schema.load(new_data)
+        movie_ = movies_schema.load(new_data)
         new_movie = Movie(**movie_)
         with db.session.begin():
             db.session.add(new_movie)
@@ -47,7 +47,7 @@ class MovieView(Resource):
         if not movie:
             return "", 404
 
-        return movie_schema.dump(movie), 200
+        return movies_schema.dump(movie), 200
 
     def put(self, mid):
         movie_selected = db.session.query(Movie).filter(Movie.id == mid)
