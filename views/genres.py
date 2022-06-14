@@ -21,9 +21,8 @@ class GenresView(Resource):
         new_data = request.json
 
         genre_ = genre_schema.load(new_data)
-        new_genre = Genre(**genre_)
         with db.session.begin():
-            db.session.add(new_genre)
+            db.session.add(genre_)
 
         return "", 201
 
