@@ -21,9 +21,8 @@ class DirectorsView(Resource):
         new_data = request.json
 
         director_ = director_schema.load(new_data)
-        new_director = Director(**director_)
         with db.session.begin():
-            db.session.add(new_director)
+            db.session.add(director_)
 
         return "", 201
     # ставим при проверке закрывающий слэш в Postman
