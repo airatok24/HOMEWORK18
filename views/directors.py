@@ -19,16 +19,12 @@ class DirectorsView(Resource):
 
     def post(self):
         new_data = request.json
-
-        director_ = director_schema.load(new_data)
+        new_director = Director(**new_data)
         with db.session.begin():
-            db.session.add(director_)
+            db.session.add(new_director)
 
         return "", 201
-    # ставим при проверке закрывающий слэш в Postman
 
-
-new_director = {"name": "Шеридан Шеридан"}
 
 
 @director_ns.route("/<int:did>")
