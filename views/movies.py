@@ -6,7 +6,7 @@ from setup_db import db
 movie_ns = Namespace('movies')
 
 movies_schema = MovieSchema(many=True)
-movies_schema_id = MovieSchema
+movie_schema = MovieSchema()
 
 
 @movie_ns.route("/")
@@ -47,7 +47,7 @@ class MovieView(Resource):
         if not movie:
             return "", 404
 
-        return movies_schema_id.dump(movie), 200
+        return movie_schema.dump(movie), 200
 
     def put(self, mid):
         movie_selected = db.session.query(Movie).filter(Movie.id == mid)
