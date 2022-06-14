@@ -19,10 +19,9 @@ class GenresView(Resource):
 
     def post(self):
         new_data = request.json
-
-        genre_ = genre_schema.load(new_data)
+        new_genre = Genre(new_data)
         with db.session.begin():
-            db.session.add(genre_)
+            db.session.add(new_genre)
 
         return "", 201
 
