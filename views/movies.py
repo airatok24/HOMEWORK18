@@ -32,10 +32,9 @@ class MoviesView(Resource):
 
     def post(self):
         new_data = request.json
-
-        movie_ = movies_schema.load(new_data)
+        new_movie=Movie(**new_data)
         with db.session.begin():
-            db.session.add(movie_)
+            db.session.add(new_movie)
 
         return "", 201
 
